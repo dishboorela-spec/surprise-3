@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Birthday Cake 🎂</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      #mainTitle {
+        font-size: 32px;
+        font-family: 'Pixelify Sans', sans-serif;
+        margin-bottom: 8px;
+      }
+
+      #subTitle {
+        font-size: 18px;
+        font-family: 'Pixelify Sans', sans-serif;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="birthdayText"></div>
+      <div class="cake-container">
+        <div class="cake" id="cake"></div>
+      </div>
+    </div>
+
+    <script>
+ 	const params = new URLSearchParams(window.location.search);
+  	const name = params.get("name") || "Hansi";
+  	let candleCount = parseInt(params.get("candles")) || 4;
+  	candleCount = Math.min(Math.max(candleCount, 1), 4); 
+
+ 	const birthdayText = document.getElementById("birthdayText");
+ 	birthdayText.innerHTML = `
+        	<div id="mainTitle">Happy Birthday, ${name}!</div>
+  		<div id="subTitle" style="font-size: 18px; font-family: 'Pixelify Sans', sans-serif; color: #555; margin-bottom: 20px;">
+ 		     cake :3
+ 		</div>
+  	`;
+
+  	const cake = document.getElementById("cake");
+  	const colors = ["purple-candle", "blue-candle", "yellow-candle", "pink-candle"];
+
+  	function createCandles(count) {
+    	cake.innerHTML = ""; 
+
+ 	const candlePositions = [
+  	 { left: "42px",  top: "-20px" },  // Wick 1
+  	 { left: "92px",  top: "-15px" },  // Wick 2
+   	 { left: "142px",  top: "-15px" },  // Wick 3
+   	 { left: "192px", top: "-20px" }   // Wick 4
+  	];
+
+    	for (let i = 0; i < count; i++) {
+      	const candle = document.createElement("div");
+      	candle.classList.add(colors[i % colors.length]);
+
+      	candle.style.position = "absolute";
+      	candle.style.left = candlePositions[i].left;
+      	candle.style.top = candlePositions[i].top;
+
+      	cake.appendChild(candle);
+    	}
+ 	}
+
+ 	createCandles(candleCount);
+    </script>
+  </body>
+</html>
